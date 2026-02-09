@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMBERS - NOTAVAILABLE</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo 1.png">
+
+    <!-- SEO & Social Media Meta Tags -->
+    <meta name="description"
+        content="รายชื่อสมาชิกทีม NOTAVAILABLE - ทำความรู้จักกับเหล่านักแข่งและสมาชิกในครอบครัวของเรา">
+    <meta property="og:title" content="MEMBERS - NOTAVAILABLE">
+    <meta property="og:description" content="ทำความรู้จักกับสมาชิกในทีม NOTAVAILABLE">
+    <meta property="og:image" content="img/logo 1.png">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="particles"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="img/logo 1.png" alt="Notavailable Logo" class="logo-img">
+                    <span class="logo-text">NOTAVAILABLE</span>
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="members.html" class="nav-link active">MEMBERS</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Members Section -->
+    <section class="members-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="page-title">MEMBERS LIST</h1>
+                <p class="page-description">NOTAVAILABLE SMALL DICK BIG HEART</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" />
+                        <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search..." />
+                </div>
+            </div>
+
+            <!-- Leaders Section -->
+            <div class="role-section-header">
+                <h2 class="role-title">LEADERS</h2>
+                <div class="role-divider"></div>
+            </div>
+            <div class="members-grid" id="leadersGrid">
+                <!-- Leaders will be inserted here by JS -->
+            </div>
+
+            <!-- Members Section -->
+            <div class="role-section-header" style="margin-top: var(--spacing-3xl);">
+                <h2 class="role-title">MEMBERS</h2>
+                <div class="role-divider"></div>
+            </div>
+            <div class="members-grid" id="membersGrid">
+                <!-- Members will be inserted here by JS -->
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination" class="pagination">
+                <!-- Pagination buttons will be loaded dynamically -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                    <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <h3>ไม่พบสมาชิก</h3>
+                <p>ลองค้นหาด้วยคำอื่น หรือลองใหม่อีกครั้ง</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="copyright">&copy; NOTAVAILABLE. DESIGNED BY DEJE NOTAVAILABLE.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

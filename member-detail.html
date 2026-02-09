@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMBER DETAIL - NOTAVAILABLE</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo 1.png">
+
+    <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="ข้อมูลสมาชิกทีม NOTAVAILABLE - ผลงาน ไฮไลท์ และช่องทางการติดตาม">
+    <meta property="og:title" content="MEMBER DETAIL - NOTAVAILABLE">
+    <meta property="og:description" content="ร่วมติดตามผลงานของสมาชิกในทีม NOTAVAILABLE">
+    <meta property="og:image" content="img/logo 1.png">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="particles"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="img/logo 1.png" alt="Notavailable Logo" class="logo-img">
+                    <span class="logo-text">NOTAVAILABLE</span>
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="members.html" class="nav-link">MEMBERS</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Member Detail Section -->
+    <section class="detail-section">
+        <div class="container">
+            <a href="members.html" class="back-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                BACK TO MEMBERS
+            </a>
+
+            <div id="memberDetail" class="detail-content">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="copyright">&copy; 2026 NOTAVAILABLE. DESIGNED BY DEJE NOTAVAILABLE.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load member detail on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const memberId = parseInt(urlParams.get('id'));
+
+            if (memberId) {
+                const member = membersData.find(m => m.id === memberId);
+                if (member) {
+                    document.title = `Notavailable - ${member.name.toUpperCase()}`;
+                    displayMemberDetail(member);
+                } else {
+                    document.getElementById('memberDetail').innerHTML = `
+                        <div class="error-state">
+                            <h2>MEMBER NOT FOUND</h2>
+                            <p>ขออภัย ไม่พบข้อมูลสมาชิกที่คุณค้นหา</p>
+                            <a href="members.html" class="btn btn-primary">
+                                <span>BACK TO MEMBERS</span>
+                            </a>
+                        </div>
+                    `;
+                }
+            } else {
+                window.location.href = 'members.html';
+            }
+        });
+
+        function getYouTubeEmbedUrl(url) {
+            if (!url) return null;
+            let videoId = '';
+            // Supports standard watch URLs, short URLs, and embed URLs
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+            if (match && match[2].length === 11) {
+                videoId = match[2];
+            }
+            return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+        }
+
+        function displayMemberDetail(member) {
+            const detailContainer = document.getElementById('memberDetail');
+            const videoEmbedUrl = member.videoHighlight ? getYouTubeEmbedUrl(member.videoHighlight) : null;
+
+            detailContainer.innerHTML = `
+                <div class="detail-header">
+                    <div class="detail-avatar-container">
+                        <img src="${member.avatar}" alt="${member.name}" class="detail-avatar">
+                    </div>
+                    <div class="detail-header-info">
+                        <h1 class="detail-name">${member.name}</h1>
+                        <p class="detail-role">${member.role}</p>
+                        <div class="detail-social">
+                            ${member.contact.email ? `
+                                <a href="mailto:${member.contact.email}" class="detail-social-link" title="Email">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M3 8L10.89 13.26C11.5392 13.6711 12.4608 13.6711 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            ` : ''}
+                            ${member.contact.facebook ? `
+                                <a href="${member.contact.facebook}" target="_blank" class="detail-social-link" title="Facebook">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                    </svg>
+                                </a>
+                            ` : ''}
+                            ${member.contact.github ? `
+                                <a href="${member.contact.github}" target="_blank" class="detail-social-link" title="GitHub">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            ` : ''}
+                            ${member.contact.discord ? `
+                                <a href="${member.contact.discord}" target="_blank" class="detail-social-link" title="Discord">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                                    </svg>
+                                </a>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-body">
+                    <div class="detail-section-wrapper">
+                        <h2 class="detail-section-title">PERFORMANCE</h2>
+                        <p class="detail-bio">${member.bio}</p>
+                    </div>
+
+                    ${videoEmbedUrl ? `
+                        <div class="detail-section-wrapper">
+                            <h2 class="detail-section-title">HIGHLIGHT</h2>
+                            <div class="video-wrapper">
+                                <iframe src="${videoEmbedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div style="text-align: center; margin-top: var(--spacing-sm);">
+                                <a href="${member.videoHighlight}" target="_blank" style="color: var(--color-purple-light); text-decoration: none; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--color-white)'" onmouseout="this.style.color='var(--color-purple-light)'">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                    </svg>
+                                    Watch on YouTube
+                                </a>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${member.interests && member.interests.length > 0 ? `
+                        <div class="detail-section-wrapper">
+                            <h2 class="detail-section-title">INTERESTS</h2>
+                            <div class="interests-grid">
+                                ${member.interests.map(interest => `
+                                    <span class="interest-tag">${interest}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${member.skills && member.skills.length > 0 ? `
+                        <div class="detail-section-wrapper">
+                            <h2 class="detail-section-title">SKILLS</h2>
+                            <div class="skills-list">
+                                ${member.skills.map(skill => `
+                                    <div class="skill-item">
+                                        <span class="skill-name">${skill.name}</span>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress" style="width: ${skill.level}%"></div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${member.joinDate || member.location ? `
+                        <div class="detail-section-wrapper">
+                            <h2 class="detail-section-title">INFO</h2>
+                            <div class="info-grid">
+                                ${member.joinDate ? `
+                                    <div class="info-item">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                            <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                        <div>
+                                            <span class="info-label">JOINED</span>
+                                            <span class="info-value">${member.joinDate}</span>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                ${member.location ? `
+                                    <div class="info-item">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2"/>
+                                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                        <div>
+                                            <span class="info-label">LOCATION</span>
+                                            <span class="info-value">${member.location}</span>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>

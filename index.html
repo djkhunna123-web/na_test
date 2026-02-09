@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOTAVAILABLE</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo 1.png">
+
+    <!-- SEO & Social Media Meta Tags -->
+    <meta name="description" content="NOTAVAILABLE ">
+    <meta property="og:image" content="img/logo 1.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Video Background -->
+    <div class="bg-animation">
+        <video class="video-bg" id="bgVideo" autoplay loop playsinline>
+            <source src="vdo/NA SHORTCLIP RSMB PRO.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="particles"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Sound Toggle Button -->
+    <button class="sound-toggle" id="soundToggle" title="Toggle Sound">
+        <svg class="icon-sound-on" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <svg class="icon-sound-off" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+            <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="img/logo 1.png" alt="Notavailable Logo" class="logo-img">
+                    <span class="logo-text">NOTAVAILABLE</span>
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link active">HOME</a>
+                    <a href="members.html" class="nav-link">MEMBERS</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">LASTNAME NOTAVAILABLE</div>
+            <h1 class="hero-title">
+                <span class="title-main">NOTAVAILABLE</span>
+            </h1>
+            <p class="hero-tagline">SMALL DICK BIG HEART</p>
+            <div class="hero-buttons">
+                <a href="members.html" class="btn btn-primary">
+                    <span>VIEW MEMBERS</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div class="hero-decoration">
+            <div class="hex-grid">
+                <div class="hex"></div>
+                <div class="hex"></div>
+                <div class="hex"></div>
+                <div class="hex"></div>
+                <div class="hex"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="copyright">&copy; 2026 NOTAVAILABLE. DESIGNED BY DEJE NOTAVAILABLE.</p>
+                <div class="footer-social">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Video sound control
+        const video = document.getElementById('bgVideo');
+        const soundToggle = document.getElementById('soundToggle');
+        const iconOn = soundToggle.querySelector('.icon-sound-on');
+        const iconOff = soundToggle.querySelector('.icon-sound-off');
+
+        // Set initial volume to 20% and muted
+        video.volume = 0.2;
+        video.muted = true;
+
+        // Toggle sound
+        soundToggle.addEventListener('click', () => {
+            video.muted = !video.muted;
+            if (video.muted) {
+                iconOn.style.display = 'none';
+                iconOff.style.display = 'block';
+            } else {
+                iconOn.style.display = 'block';
+                iconOff.style.display = 'none';
+            }
+        });
+
+        // Initial state - show muted icon
+        iconOn.style.display = 'none';
+        iconOff.style.display = 'block';
+    </script>
+</body>
+
+</html>
