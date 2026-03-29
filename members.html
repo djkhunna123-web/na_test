@@ -121,7 +121,7 @@
         <div class="vinyl-wrap" id="vinylWrap" title="Play / Pause">
             <div class="vinyl-disc" id="vinylDisc">
                 <div class="vinyl-center">
-                    <img src="https://img.youtube.com/vi/n-cH2WyYJiA/hqdefault.jpg" alt="BGM" class="vinyl-art">
+                    <img src="https://img.youtube.com/vi/2rVEM51VP08/hqdefault.jpg" alt="BGM" class="vinyl-art">
                     <div class="vinyl-hole"></div>
                 </div>
             </div>
@@ -146,9 +146,17 @@
 
         function onYouTubeIframeAPIReady() {
             ytPlayer = new YT.Player('yt-player', {
-                videoId: 'n-cH2WyYJiA',
-                playerVars: { loop: 1, playlist: 'n-cH2WyYJiA', controls: 0 },
-                events: { onReady: function(e) { e.target.setVolume(30); } }
+                videoId: '2rVEM51VP08',
+                playerVars: { loop: 1, playlist: '2rVEM51VP08', controls: 0 },
+                events: {
+                    onReady: function(e) {
+                        e.target.setVolume(30);
+                        e.target.playVideo();
+                        isPlaying = true;
+                        document.getElementById('vinylWrap').classList.add('playing');
+                        document.getElementById('vinylDisc').classList.add('playing');
+                    }
+                }
             });
         }
 
