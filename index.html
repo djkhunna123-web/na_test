@@ -35,21 +35,21 @@
         <div class="glow-orb orb-2"></div>
     </div>
 
-    <!-- Sound Toggle Button -->
-    <button class="sound-toggle" id="soundToggle" title="Toggle Sound">
-        <svg class="icon-sound-on" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" />
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <svg class="icon-sound-off" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
-            <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" />
-            <line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            <line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-    </button>
+    <!-- Volume Control -->
+    <div class="volume-control" id="volumeControl">
+        <button class="volume-btn" id="volumeBtn" title="Mute/Unmute">
+            <svg class="icon-sound-on" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="icon-sound-off" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none">
+                <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="20" title="Volume">
+    </div>
 
     <!-- Header -->
     <header class="header">
@@ -112,31 +112,37 @@
 
     <script src="script.js"></script>
     <script>
-        // Video sound control
         const video = document.getElementById('bgVideo');
-        const soundToggle = document.getElementById('soundToggle');
-        const iconOn = soundToggle.querySelector('.icon-sound-on');
-        const iconOff = soundToggle.querySelector('.icon-sound-off');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const iconOn = volumeBtn.querySelector('.icon-sound-on');
+        const iconOff = volumeBtn.querySelector('.icon-sound-off');
 
-        // Set initial volume to 20% and muted
         video.volume = 0.2;
-        video.muted = true;
+        video.muted = false;
 
-        // Toggle sound
-        soundToggle.addEventListener('click', () => {
-            video.muted = !video.muted;
-            if (video.muted) {
-                iconOn.style.display = 'none';
-                iconOff.style.display = 'block';
-            } else {
-                iconOn.style.display = 'block';
-                iconOff.style.display = 'none';
-            }
+        // Try autoplay with sound, fallback to muted
+        video.play().catch(() => {
+            video.muted = true;
+            iconOn.style.display = 'none';
+            iconOff.style.display = 'block';
         });
 
-        // Initial state - show muted icon
-        iconOn.style.display = 'none';
-        iconOff.style.display = 'block';
+        // Mute/unmute button
+        volumeBtn.addEventListener('click', () => {
+            video.muted = !video.muted;
+            iconOn.style.display = video.muted ? 'none' : 'block';
+            iconOff.style.display = video.muted ? 'block' : 'none';
+            if (!video.muted) volumeSlider.value = video.volume * 100;
+        });
+
+        // Volume slider
+        volumeSlider.addEventListener('input', function() {
+            video.volume = this.value / 100;
+            video.muted = this.value == 0;
+            iconOn.style.display = this.value == 0 ? 'none' : 'block';
+            iconOff.style.display = this.value == 0 ? 'block' : 'none';
+        });
     </script>
 </body>
 
