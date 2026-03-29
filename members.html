@@ -55,6 +55,7 @@
             <div class="section-header">
                 <h1 class="page-title">MEMBERS LIST</h1>
                 <p class="page-description">NOTAVAILABLE SMALL DICK BIG HEART</p>
+                <div id="members-stats" class="members-stats"></div>
             </div>
 
             <!-- Search Bar -->
@@ -70,7 +71,7 @@
 
             <!-- Leaders Section -->
             <div class="role-section-header">
-                <h2 class="role-title">LEADERS</h2>
+                <h2 class="role-title leader-title">LEADERS</h2>
                 <div class="role-divider"></div>
             </div>
             <div class="members-grid" id="leadersGrid">
@@ -79,7 +80,7 @@
 
             <!-- Members Section -->
             <div class="role-section-header" style="margin-top: var(--spacing-3xl);">
-                <h2 class="role-title">MEMBERS</h2>
+                <h2 class="role-title member-title">MEMBERS</h2>
                 <div class="role-divider"></div>
             </div>
             <div class="members-grid" id="membersGrid">
@@ -113,6 +114,63 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- Vinyl Record Music Player -->
+    <button class="vinyl-hide-btn" id="vinylHideBtn" title="ซ่อน/แสดง">♪</button>
+    <div class="vinyl-player" id="vinylPlayer">
+        <div class="vinyl-wrap" id="vinylWrap" title="Play / Pause">
+            <div class="vinyl-disc" id="vinylDisc">
+                <div class="vinyl-center">
+                    <img src="https://img.youtube.com/vi/n-cH2WyYJiA/hqdefault.jpg" alt="BGM" class="vinyl-art">
+                    <div class="vinyl-hole"></div>
+                </div>
+            </div>
+            <div class="vinyl-play-overlay">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+        </div>
+        <input type="range" class="vinyl-volume" id="musicVolume" min="0" max="100" value="30" title="Volume">
+    </div>
+
+    <!-- YouTube Player (off-screen, needs real size for API to work) -->
+    <div id="yt-player" style="position:fixed;width:320px;height:180px;top:-600px;left:-600px;pointer-events:none;"></div>
+
+    <script>
+        (function() {
+            var tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            document.head.appendChild(tag);
+        })();
+
+        var ytPlayer, isPlaying = false;
+
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('yt-player', {
+                videoId: 'n-cH2WyYJiA',
+                playerVars: { loop: 1, playlist: 'n-cH2WyYJiA', controls: 0 },
+                events: { onReady: function(e) { e.target.setVolume(30); } }
+            });
+        }
+
+        document.getElementById('vinylWrap').addEventListener('click', function() {
+            if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') return;
+            isPlaying ? ytPlayer.pauseVideo() : ytPlayer.playVideo();
+            isPlaying = !isPlaying;
+            document.getElementById('vinylWrap').classList.toggle('playing', isPlaying);
+            document.getElementById('vinylDisc').classList.toggle('playing', isPlaying);
+        });
+
+        document.getElementById('musicVolume').addEventListener('input', function() {
+            if (ytPlayer && typeof ytPlayer.setVolume === 'function')
+                ytPlayer.setVolume(parseInt(this.value));
+        });
+
+        document.getElementById('vinylHideBtn').addEventListener('click', function() {
+            const player = document.getElementById('vinylPlayer');
+            const hidden = player.classList.toggle('hidden');
+            this.textContent = hidden ? '♪' : '×';
+        });
+    </script>
 
 </body>
 
